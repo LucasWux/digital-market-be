@@ -7,7 +7,12 @@ import { RedisModule } from '@nestjs-modules/ioredis';
 import { env } from 'src/config';
 
 import { HealthCheckModule } from './health-check/health-check.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import dataSource from 'src/libs/typeorm.config';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
 
 @Module({
   imports: [
@@ -24,6 +29,18 @@ import dataSource from 'src/libs/typeorm.config';
       },
     }),
     HealthCheckModule,
+    AuthModule,
+    UserModule,
+  ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: SanitizeInterceptor,
+    },
   ],
 })
 export class AppModule {}

@@ -21,6 +21,7 @@ const envVarsSchema = Joi.object()
     REDIS_PORT: Joi.number().default(6379),
     REDIS_PASSWORD: Joi.string().default(''),
     REDIS_DB: Joi.number().default(0),
+    SECRET_KEY: Joi.string().required(),
   })
   .unknown();
 
@@ -48,5 +49,8 @@ export const env = {
     port: envVars.REDIS_PORT,
     password: envVars.REDIS_PASSWORD,
     db: envVars.REDIS_DB,
+  },
+  auth: {
+    secretKey: envVars.SECRET_KEY,
   },
 };
