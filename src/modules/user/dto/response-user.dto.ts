@@ -1,15 +1,22 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiResponseProperty } from '@nestjs/swagger';
+import { BaseEntity } from 'src/utils/base/base-entity';
 
-export class UserResponseDto {
-  @ApiProperty({ type: String })
-  id: number;
-
-  @ApiProperty({ type: String })
+export class UserResponseDto extends BaseEntity {
+  @ApiResponseProperty({ type: String })
   userName: string;
 
-  @ApiProperty({ type: String })
-  created_at: Date;
+  @ApiResponseProperty({ type: String })
+  avatar: string;
 
-  @ApiProperty({ type: String })
-  updated_at: Date;
+  @ApiResponseProperty({ type: Number })
+  birthDay: number;
+
+  @ApiResponseProperty({ type: Boolean })
+  gender: boolean; // 0 stand for female, 1 stand for male
+
+  @ApiResponseProperty({ type: String })
+  name: string;
+
+  @ApiResponseProperty({ type: String })
+  address: string;
 }

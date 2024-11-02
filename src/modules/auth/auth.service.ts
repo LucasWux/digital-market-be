@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   async registerUser(userName: string, password: string) {
-    await this.userService.register(userName, password);
+    return await this.userService.register(userName, password);
   }
 
   async login(user: User) {
