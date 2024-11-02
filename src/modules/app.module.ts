@@ -13,6 +13,7 @@ import dataSource from 'src/libs/typeorm.config';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
     HealthCheckModule,
     AuthModule,
     UserModule,
+    ProductModule,
   ],
   providers: [
     {
