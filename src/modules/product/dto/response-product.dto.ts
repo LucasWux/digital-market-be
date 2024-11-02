@@ -2,7 +2,7 @@ import { ApiResponseProperty } from '@nestjs/swagger';
 import { BaseResponse } from 'src/utils/base/base-response';
 import { ProductStatus, ProductType } from '../entities/product.entity';
 
-export class ProductResponse extends BaseResponse {
+export class ProductResponseDto extends BaseResponse {
   @ApiResponseProperty({ enum: ProductStatus })
   status: ProductStatus;
 
@@ -27,6 +27,6 @@ export class ProductResponse extends BaseResponse {
   @ApiResponseProperty({ type: Number })
   ownerId: number;
 
-  @ApiResponseProperty({ type: String, enum: ProductType })
+  @ApiResponseProperty({ type: [String], enum: ProductType })
   type?: ProductType[];
 }
