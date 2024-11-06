@@ -3,7 +3,7 @@ import { BaseEntity } from 'src/utils/base/base-entity';
 
 export class UserResponseDto extends BaseEntity {
   @ApiResponseProperty({ type: String })
-  userName: string;
+  username: string;
 
   @ApiResponseProperty({ type: String })
   avatar: string;

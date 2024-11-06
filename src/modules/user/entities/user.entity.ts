@@ -6,7 +6,7 @@ import { ApiHideProperty } from '@nestjs/swagger';
 @Entity()
 export class User extends BaseEntity {
   @Column({ nullable: false })
-  userName: string;
+  username: string;
 
   @Column({ nullable: false })
   @Exclude({ toPlainOnly: true })
