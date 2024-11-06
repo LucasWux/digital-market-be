@@ -14,6 +14,7 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
 import { ProductModule } from './product/product.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { ProductModule } from './product/product.module';
     AuthModule,
     UserModule,
     ProductModule,
+    ChatModule,
   ],
   providers: [
     {

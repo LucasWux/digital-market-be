@@ -1,8 +1,26 @@
-import { Chat } from '../entities/chat.entity';
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateChatDto {
-    @ApiProperty({ type: Number})
-    status ?: boolean;
+  @ApiProperty({ type: Number })
+  @IsNotEmpty()
+  @IsNumber()
+  receiverId: number;
 
+  @ApiProperty({ type: String })
+  @IsNotEmpty()
+  @IsString()
+  content: string;
+
+  @ApiProperty({ isArray: true, type: [String], required: false })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  image?: string[];
 }

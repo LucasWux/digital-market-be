@@ -1,24 +1,35 @@
 import { BaseEntity } from 'src/utils/base/base-entity';
-import { productTypeTransformer } from 'src/utils/tranformers/product-tranformer';
+import { getTimeNowBySeconds } from 'src/utils/timeHelpers';
+import { stringsTypeTransformer } from 'src/utils/tranformers/strings-tranformer';
 import { Column, Entity } from 'typeorm';
+
+export enum ChatStatus {
+  active = 'active',
+  hidden = 'hidden',
+}
 
 @Entity()
 export class Chat extends BaseEntity {
-    @Column({ nullable: false, default: 1 })
-    status: boolean; //active: 1, hidden: 0
-    
-    @Column({ nullable: false}) // how to be auto-incremental???
-    id: number;
-    
-    @Column({ nullable: false })
-    senderId: number;
-    
-    @Column({ nullable: false })
-    receiverId: number;
-    
-    @Column({ nullable: false })
-    content: string;
-    
-    @Column({ nullable: true})
-    image: string[];
+  @Column({
+    type: 'enum',
+    enum: ChatStatus,
+    nullable: false,
+    default: ChatStatus.active,
+  })
+  status: ChatStatus;
+
+  @Column({ nullable: false })
+  senderId: number;
+
+  @Column({ nullable: false })
+  receiverId: number;
+
+  @Column({ nullable: false })
+  content: string;
+
+  @Column({ type: 'text', nullable: true, transformer: stringsTypeTransformer })
+  image: string[];
+
+  @Column({ nullable: false, default: getTimeNowBySeconds() })
+  createTime: number;
 }
