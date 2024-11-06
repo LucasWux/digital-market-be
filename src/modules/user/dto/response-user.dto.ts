@@ -1,7 +1,7 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
-import { BaseEntity } from 'src/utils/base/base-entity';
+import { BaseResponse } from 'src/utils/base/base-response';
 
-export class UserResponseDto extends BaseEntity {
+export class UserResponseDto extends BaseResponse {
   @ApiResponseProperty({ type: String })
   username: string;
 

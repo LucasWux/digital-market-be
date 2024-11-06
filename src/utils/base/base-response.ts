@@ -5,9 +5,6 @@ export class BaseResponse {
   id: number;
 
   @ApiResponseProperty({ type: String })
-  username: string;
-
-  @ApiResponseProperty({ type: String })
   created_at: Date;
 
   @ApiResponseProperty({ type: String })
