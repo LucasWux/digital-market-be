@@ -18,7 +18,7 @@ export class CreateChatDto {
   @IsString()
   content: string;
 
-  @ApiProperty({ isArray: true, type: [String], required: false })
+  @ApiProperty({ type: [String], required: false })
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
