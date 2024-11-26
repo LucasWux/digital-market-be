@@ -17,6 +17,12 @@ const envVarsSchema = Joi.object()
     MYSQL_PASSWORD: Joi.string().required(),
     MYSQL_DATABASE_NAME: Joi.string().required(),
 
+    BUCKET_NAME: Joi.string().required(),
+    MINIO_ACCESS_KEY: Joi.string().required(),
+    MINIO_HOST: Joi.string().required(),
+    MINIO_PORT: Joi.number().required(),
+    MINIO_SECRET_KEY: Joi.string().required(),
+
     REDIS_HOST: Joi.string().default('localhost'),
     REDIS_PORT: Joi.number().default(6379),
     REDIS_PASSWORD: Joi.string().default(''),
@@ -44,6 +50,13 @@ export const env = {
     password: envVars.MYSQL_PASSWORD,
     dbName: envVars.MYSQL_DATABASE_NAME,
     testDbName: 'test',
+  },
+  minio: {
+    accessKey: envVars.MINIO_ACCESS_KEY,
+    bucket: envVars.BUCKET_NAME,
+    host: envVars.MINIO_HOST,
+    port: envVars.MINIO_PORT,
+    secretKey: envVars.MINIO_SECRET_KEY,
   },
   redis: {
     host: envVars.REDIS_HOST,

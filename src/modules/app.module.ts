@@ -15,6 +15,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
 import { ProductModule } from './product/product.module';
 import { ChatModule } from './chat/chat.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { ChatModule } from './chat/chat.module';
         db: env.redis.db,
       },
     }),
+    FileUploadModule,
     HealthCheckModule,
     AuthModule,
     UserModule,
