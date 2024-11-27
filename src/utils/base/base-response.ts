@@ -10,3 +10,14 @@ export class BaseResponse {
   @ApiResponseProperty({ type: String })
   updated_at: Date;
 }
+
+export class BasePaginationResponse {
+  @ApiResponseProperty({ type: Number })
+  total: number;
+
+  @ApiResponseProperty({ type: Number })
+  page: number;
+
+  @ApiResponseProperty({ type: Number })
+  pageSize: number;
+}

@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/utils/base/base-entity';
 import { productTypeTransformer } from 'src/utils/tranformers/product-tranformer';
+import { stringsTypeTransformer } from 'src/utils/tranformers/strings-tranformer';
 import { Column, Entity } from 'typeorm';
 
 export enum ProductStatus {
@@ -22,8 +23,21 @@ export class Product extends BaseEntity {
   })
   status: ProductStatus;
 
+  @Column({ nullable: false })
+  name: string;
+
+  @Column({ nullable: true })
+  description?: string;
+
+  @Column({
+    type: 'text',
+    nullable: false,
+    transformer: stringsTypeTransformer,
+  })
+  images: string[];
+
   @Column({ nullable: false, default: 0 })
-  Price: number;
+  price: number;
 
   @Column({ nullable: false, default: 0 })
   discount: number;
@@ -35,6 +49,9 @@ export class Product extends BaseEntity {
   remaining: number;
 
   @Column({ nullable: false, default: 0 })
+  soldNumber: number;
+
+  @Column({ nullable: false, default: 0 })
   totalLike: number;
 
   @Column({ nullable: false, default: 0 })
@@ -44,5 +61,8 @@ export class Product extends BaseEntity {
   ownerId: number;
 
   @Column({ nullable: true, type: 'text', transformer: productTypeTransformer })
-  type?: ProductType[];
+  types?: ProductType[];
+
+  @Column({ nullable: false, default: 0 })
+  createdTime: number;
 }

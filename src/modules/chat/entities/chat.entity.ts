@@ -1,5 +1,4 @@
 import { BaseEntity } from 'src/utils/base/base-entity';
-import { getTimeNowBySeconds } from 'src/utils/timeHelpers';
 import { stringsTypeTransformer } from 'src/utils/tranformers/strings-tranformer';
 import { Column, Entity } from 'typeorm';
 
@@ -30,6 +29,6 @@ export class Chat extends BaseEntity {
   @Column({ type: 'text', nullable: true, transformer: stringsTypeTransformer })
   image: string[];
 
-  @Column({ nullable: false, default: getTimeNowBySeconds() })
+  @Column({ nullable: false })
   createTime: number;
 }
