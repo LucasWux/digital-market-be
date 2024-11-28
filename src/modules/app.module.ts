@@ -16,6 +16,7 @@ import { SanitizeInterceptor } from 'src/interceptors/sanitize.interceptor';
 import { ProductModule } from './product/product.module';
 import { ChatModule } from './chat/chat.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
     UserModule,
     ProductModule,
     ChatModule,
+    OrderModule,
   ],
   providers: [
     {
