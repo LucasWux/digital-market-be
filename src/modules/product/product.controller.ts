@@ -41,11 +41,11 @@ export class ProductController {
     return await this.productService.findDetail(productId);
   }
 
-  @Get('/seller/:owner')
+  @Get('/seller/:ownerId')
   @Public()
   @ApiOperation({ summary: 'Get Products by ownerId' })
   @ApiOkResponse({ type: [ProductResponseDto] })
-  async findByOwner(@UserId() userId: number) {
-    return await this.productService.findByOwner(userId);
+  async findByOwner(@Param('ownerId') ownerId: number) {
+    return await this.productService.findByOwner(ownerId);
   }
 }
