@@ -37,7 +37,7 @@ export class ProductController {
   @Public()
   @ApiOperation({ summary: 'Get Product Detail by productId' })
   @ApiOkResponse({ type: ProductResponseDto })
-  async findByOwnerId(@Param('productId') productId: number) {
+  async findByProductId(@Param('productId') productId: number) {
     return await this.productService.findDetail(productId);
   }
 
@@ -45,7 +45,7 @@ export class ProductController {
   @Public()
   @ApiOperation({ summary: 'Get Products by ownerId' })
   @ApiOkResponse({ type: [ProductResponseDto] })
-  async findByOwner(@Param('ownerId') ownerId: number) {
+  async findByOwnerId(@Param('ownerId') ownerId: number) {
     return await this.productService.findByOwner(ownerId);
   }
 }
