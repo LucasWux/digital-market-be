@@ -48,10 +48,16 @@ export class CreateProductDto {
   remaining: number;
 
   @IsNumber()
-  @Min(1, { message: 'Remaining must be greater than 0' })
+  @Min(0, { message: 'Sold Number must be greater than or equal 0' })
   @IsNotEmpty()
   @ApiProperty({ type: Number, default: 0 })
   soldNumber: number;
+
+  @IsNumber()
+  @Min(0, { message: 'Rating must be greater than or equal 0' })
+  @IsNotEmpty()
+  @ApiProperty({ type: Number, default: 0 })
+  rating: number;
 
   @IsOptional()
   @IsArray()

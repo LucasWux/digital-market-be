@@ -24,17 +24,19 @@ export class JwtAuthGuard implements CanActivate {
       context.getClass(),
     ]);
 
-    if (isPublic) {
-      return true;
-    }
-
     const request = context.switchToHttp().getRequest<Request>();
     const client = context.switchToWs().getClient();
     if (client?.handshake) {
+      if (isPublic) {
+        return true;
+      }
       throw new WsException('Unauthorized');
     }
     const token = request.cookies['jwt'];
     if (!token) {
+      if (isPublic) {
+        return true;
+      }
       throw new UnauthorizedException('No token found');
     }
     try {
@@ -42,6 +44,9 @@ export class JwtAuthGuard implements CanActivate {
       request.user = decoded;
       return true;
     } catch (err) {
+      if (isPublic) {
+        return true;
+      }
       throw new UnauthorizedException('Invalid token');
     }
   }

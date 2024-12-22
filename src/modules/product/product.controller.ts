@@ -29,8 +29,11 @@ export class ProductController {
   @Public()
   @ApiOkResponse({ type: ProductPaginationResponse })
   @ApiOperation({ summary: 'Query Product' })
-  async findPagination(@Query() dto: QueryPaginationProduct) {
-    return await this.productService.findPagination(dto);
+  async findPagination(
+    @Query() dto: QueryPaginationProduct,
+    @UserId() userId: number,
+  ) {
+    return await this.productService.findPagination(dto, userId);
   }
 
   @Get('/seller/:ownerId')
@@ -55,6 +58,30 @@ export class ProductController {
   @ApiOkResponse({ type: [ProductResponseDto] })
   async findNewest() {
     return await this.productService.findNewest();
+  }
+
+  @Get('/recent-search')
+  @Public()
+  @ApiOperation({ summary: 'Get recent search Products' })
+  @ApiOkResponse({ type: [ProductResponseDto] })
+  async findRecentSearch(@UserId() userId: number) {
+    return await this.productService.findRecentSearch(userId);
+  }
+
+  @Get('/discovery')
+  @Public()
+  @ApiOperation({ summary: 'Get discovery Products' })
+  @ApiOkResponse({ type: [ProductResponseDto] })
+  async findDiscovery() {
+    return await this.productService.findDiscovery();
+  }
+
+  @Get('/suggestion')
+  @Public()
+  @ApiOperation({ summary: 'Get suggestion Products' })
+  @ApiOkResponse({ type: [ProductResponseDto] })
+  async findSuggestion() {
+    return await this.productService.findDiscovery();
   }
 
   @Get('/:productId')

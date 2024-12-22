@@ -1,17 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
-import { Brackets, Repository } from 'typeorm';
+import { Brackets, In, Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { getTimeNowBySeconds } from 'src/utils/timeHelpers';
 import { QueryPaginationProduct } from './dto/query-product.dto';
 import { ProductPaginationResponse } from './dto/response-product.dto';
+import { InjectRedis } from '@nestjs-modules/ioredis';
+import Redis from 'ioredis';
+import { RedisKey } from 'src/utils/RedisKey';
+import { getRandomNumbersCustom } from 'src/utils/helpers';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(Product)
     private readonly repo: Repository<Product>,
+    @InjectRedis()
+    private readonly redis: Redis,
   ) {}
   async create(ownerId: number, createProductDto: CreateProductDto) {
     return await this.repo.save({
@@ -29,7 +35,7 @@ export class ProductService {
     return await this.repo.findBy({ ownerId });
   }
 
-  async findPagination(dto: QueryPaginationProduct) {
+  async findPagination(dto: QueryPaginationProduct, userId: number | null) {
     const { page, pageSize, search, types, sortBy, sortOrder } = dto;
     const offset = (page - 1) * pageSize;
 
@@ -58,6 +64,14 @@ export class ProductService {
 
     const [data, total] = await qb.getManyAndCount();
 
+    if (search && userId) {
+      const productIds = data.map((item) => item.id);
+      await this.redis.set(
+        `${RedisKey.recentSearch}:${userId}`,
+        JSON.stringify(productIds),
+      );
+    }
+
     return {
       data,
       total,
@@ -84,5 +98,27 @@ export class ProductService {
       },
       take: Number(limit),
     });
+  }
+
+  async findRecentSearch(userId: number | null) {
+    if (!userId) return null;
+    const rawIds = await this.redis.get(`${RedisKey.recentSearch}:${userId}`);
+    if (!rawIds) return null;
+    const productIds = JSON.parse(rawIds) as number[];
+    return await this.repo.findBy({ id: In(productIds) });
+  }
+
+  async findByRating(limit: number = 20) {
+    return await this.repo.find({
+      order: {
+        rating: 'DESC',
+      },
+      take: Number(limit),
+    });
+  }
+
+  async findDiscovery(limit: number = 20) {
+    const ids = getRandomNumbersCustom(limit, 100);
+    return await this.repo.findBy({ id: In(ids) });
   }
 }
