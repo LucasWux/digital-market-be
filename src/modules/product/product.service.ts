@@ -65,4 +65,24 @@ export class ProductService {
       pageSize,
     } as ProductPaginationResponse;
   }
+
+  async findAndSortBySoldNumber(limit: number = 20) {
+    const products = await this.repo.find({
+      order: {
+        soldNumber: 'DESC',
+      },
+      take: Number(limit),
+    });
+
+    return products;
+  }
+
+  async findNewest(limit: number = 20) {
+    return await this.repo.find({
+      order: {
+        createdTime: 'DESC',
+      },
+      take: Number(limit),
+    });
+  }
 }

@@ -33,19 +33,35 @@ export class ProductController {
     return await this.productService.findPagination(dto);
   }
 
-  @Get('/:productId')
-  @Public()
-  @ApiOperation({ summary: 'Get Product Detail by productId' })
-  @ApiOkResponse({ type: ProductResponseDto })
-  async findByProductId(@Param('productId') productId: number) {
-    return await this.productService.findDetail(productId);
-  }
-
   @Get('/seller/:ownerId')
   @Public()
   @ApiOperation({ summary: 'Get Products by ownerId' })
   @ApiOkResponse({ type: [ProductResponseDto] })
   async findByOwnerId(@Param('ownerId') ownerId: number) {
     return await this.productService.findByOwner(ownerId);
+  }
+
+  @Get('/best-sale')
+  @Public()
+  @ApiOperation({ summary: 'Get Best Sale Products' })
+  @ApiOkResponse({ type: [ProductResponseDto] })
+  async findBestSale() {
+    return await this.productService.findAndSortBySoldNumber();
+  }
+
+  @Get('/newest')
+  @Public()
+  @ApiOperation({ summary: 'Get Newest Products' })
+  @ApiOkResponse({ type: [ProductResponseDto] })
+  async findNewest() {
+    return await this.productService.findNewest();
+  }
+
+  @Get('/:productId')
+  @Public()
+  @ApiOperation({ summary: 'Get Product Detail by productId' })
+  @ApiOkResponse({ type: ProductResponseDto })
+  async findByProductId(@Param('productId') productId: number) {
+    return await this.productService.findDetail(productId);
   }
 }

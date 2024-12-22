@@ -47,6 +47,12 @@ export class CreateProductDto {
   @ApiProperty({ type: Number, default: 1 })
   remaining: number;
 
+  @IsNumber()
+  @Min(1, { message: 'Remaining must be greater than 0' })
+  @IsNotEmpty()
+  @ApiProperty({ type: Number, default: 0 })
+  soldNumber: number;
+
   @IsOptional()
   @IsArray()
   @IsEnum(ProductType, { each: true, message: 'Invalid product type' })
