@@ -26,7 +26,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   @ApiProperty({ type: [String] })
   @IsString({ each: true })
-  image: string[];
+  images: string[];
 
   @IsNumber()
   @IsNotEmpty()
