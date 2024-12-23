@@ -61,7 +61,11 @@ export class AuthController {
   @Public()
   @ApiOkResponse({ type: AuthResponseDto })
   logout(@Res() res: Response) {
-    res.clearCookie('jwt');
+    res.clearCookie('jwt', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+    });
     res
       .status(HttpStatus.OK)
       .send({ message: 'Logout successful', isSuccess: true });
