@@ -5,6 +5,7 @@ import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateChatDto } from './dto/create-chat.dto';
 import { QueryChatDto } from './dto/query-chat.dto';
 import { UserId } from 'src/decorators/user-payload.decorator';
+import { UserResponseDto } from '../user/dto/response-user.dto';
 
 @Controller('chat')
 @ApiTags('Chat')
@@ -22,6 +23,13 @@ export class ChatController {
   @ApiOperation({ summary: 'Get Chat Box' })
   @ApiOkResponse({ type: [ChatResponseDto] })
   async get(@UserId() ownerId: number, @Query() dto: QueryChatDto) {
-    return this.chatService.getChatBox(ownerId, dto);
+    return await this.chatService.getChatBox(ownerId, dto);
+  }
+
+  @Get('/list-user')
+  @ApiOperation({ summary: 'Get list users in chat' })
+  @ApiOkResponse({ type: [UserResponseDto] })
+  async getListUsers(@UserId() ownerId: number) {
+    return await this.chatService.getListPartner(ownerId);
   }
 }
