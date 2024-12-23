@@ -121,4 +121,12 @@ export class ProductService {
     const ids = getRandomNumbersCustom(limit, 100);
     return await this.repo.findBy({ id: In(ids) });
   }
+
+  async deleteByProductId(productId: number) {
+    await this.repo.delete(productId);
+  }
+
+  async deleteAll() {
+    await this.repo.clear();
+  }
 }

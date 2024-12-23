@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Query,
+  Delete,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UserId } from 'src/decorators/user-payload.decorator';
@@ -90,5 +98,17 @@ export class ProductController {
   @ApiOkResponse({ type: ProductResponseDto })
   async findByProductId(@Param('productId') productId: number) {
     return await this.productService.findDetail(productId);
+  }
+
+  @Delete('/all')
+  @Public()
+  async deleteAll() {
+    await this.productService.deleteAll();
+  }
+
+  @Delete('/one')
+  @Public()
+  async deleteOne(@Query('productId') productId: number) {
+    await this.productService.deleteByProductId(Number(productId));
   }
 }

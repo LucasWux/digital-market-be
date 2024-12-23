@@ -19,7 +19,7 @@ export enum SortOrder {
 export class QueryPaginationProduct extends PaginationDto {
   @IsString()
   @IsOptional()
-  @ApiProperty({ type: String })
+  @ApiProperty({ type: String, required: false })
   search: string;
 
   @IsOptional()
