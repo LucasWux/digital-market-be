@@ -11,6 +11,14 @@ export enum ProductStatus {
 export enum ProductType {
   Electronic = 'Electronic',
   Groceries = 'Groceries',
+  Clothing = 'Clothing',
+  HomeAppliances = 'HomeAppliances',
+  Books = 'Books',
+  BeautyAndHealth = 'BeautyAndHealth',
+  SportsAndOurDoors = 'SportsAndOurDoors',
+  ToysAndGames = 'ToysAndGames',
+  Furniture = 'Furniture',
+  Automotive = 'Automotive',
 }
 
 @Entity()
