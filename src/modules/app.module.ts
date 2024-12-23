@@ -17,6 +17,7 @@ import { ProductModule } from './product/product.module';
 import { ChatModule } from './chat/chat.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { OrderModule } from './order/order.module';
+import { RatingModule } from './rating/rating.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { OrderModule } from './order/order.module';
     ProductModule,
     ChatModule,
     OrderModule,
+    RatingModule,
   ],
   providers: [
     {
