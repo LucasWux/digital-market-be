@@ -17,4 +17,7 @@ export class ChatResponseDto extends BaseResponse {
 
   @ApiResponseProperty({ type: [String] })
   image: string[];
+
+  @ApiResponseProperty({ type: Number })
+  createTime: number;
 }
