@@ -19,7 +19,7 @@ const setMiddleware = (app: NestExpressApplication) => {
 
   app.enableCors({
     credentials: true,
-    origin: false,
+    origin: (_, callback) => callback(null, true),
   });
 
   app.use(morgan('combined'));
