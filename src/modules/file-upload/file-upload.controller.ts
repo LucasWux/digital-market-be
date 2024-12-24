@@ -62,6 +62,10 @@ export class FileUploadController {
     @Res() res: Response,
   ) {
     const { file, contentType } = await this.fileUploadService.get(fileName);
+    res.setHeader(
+      'Set-Cookie',
+      `your_cookie_name=your_cookie_value; Path=/; SameSite=None; Secure`,
+    );
     res.setHeader('Content-Type', contentType);
     file.pipe(res);
   }
