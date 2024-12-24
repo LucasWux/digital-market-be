@@ -13,6 +13,7 @@ import { FileUploadService } from './file-upload.service';
 import { BufferedFile } from '../minio-client/file.model';
 import { Response } from 'express';
 import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UploadFileResponse } from './response-file';
 
 @ApiTags('File Upload')
 @Controller('file-upload')
@@ -33,7 +34,11 @@ export class FileUploadController {
       },
     },
   })
-  @ApiResponse({ status: 200, description: 'upload image' })
+  @ApiResponse({
+    status: 200,
+    description: 'upload image',
+    type: UploadFileResponse,
+  })
   async uploadSingle(@UploadedFile() file: BufferedFile) {
     return await this.fileUploadService.uploadSingle(file);
   }
