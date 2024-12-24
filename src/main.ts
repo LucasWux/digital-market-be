@@ -18,7 +18,8 @@ const setMiddleware = (app: NestExpressApplication) => {
   app.use(helmet());
 
   app.enableCors({
-    origin: false, // Disable all CORS policies
+    credentials: true,
+    origin: false,
   });
 
   app.use(morgan('combined'));
