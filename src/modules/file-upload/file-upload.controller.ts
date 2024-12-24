@@ -14,6 +14,7 @@ import { BufferedFile } from '../minio-client/file.model';
 import { Response } from 'express';
 import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UploadFileResponse } from './response-file';
+import { Public } from 'src/decorators/public.decorator';
 
 @ApiTags('File Upload')
 @Controller('file-upload')
@@ -56,6 +57,7 @@ export class FileUploadController {
       },
     },
   })
+  @Public()
   async get(
     @Param('fileName') fileName: string,
     @Req() req: Request,
