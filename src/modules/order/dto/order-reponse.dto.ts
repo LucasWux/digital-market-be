@@ -1,5 +1,6 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 import { OrderStatus } from '../entities/order.entity';
+import { BasePaginationResponse } from 'src/utils/base/base-response';
 
 export class OrderResponse {
   @ApiResponseProperty({ enum: OrderStatus })
@@ -22,4 +23,9 @@ export class OrderResponse {
 
   @ApiResponseProperty({ type: Number })
   purchasedTime: number;
+}
+
+export class OrderPaginationResponse extends BasePaginationResponse {
+  @ApiResponseProperty({ type: [OrderResponse] })
+  data: OrderResponse[];
 }
