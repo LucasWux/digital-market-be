@@ -12,6 +12,9 @@ export class OrderResponse {
   @ApiResponseProperty({ type: Number })
   productId: number;
 
+  @ApiResponseProperty({ type: Number })
+  sellerId: number;
+
   @ApiResponseProperty({ type: String })
   address: string;
 

@@ -26,6 +26,9 @@ export class Order extends BaseEntity {
   productId: number;
 
   @Column({ nullable: false })
+  sellerId: number;
+
+  @Column({ nullable: false })
   address: string;
 
   @Column({ nullable: false })

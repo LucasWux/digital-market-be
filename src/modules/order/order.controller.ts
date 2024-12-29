@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -53,5 +54,17 @@ export class OrderController {
   @ApiOperation({ summary: 'Order Detail' })
   async findOne(@Param('id') id: string) {
     return await this.service.findOne(Number(id));
+  }
+
+  @Delete('/all')
+  @Public()
+  async deleteAll() {
+    await this.service.deleteAll();
+  }
+
+  @Delete('/one')
+  @Public()
+  async deleteOne(@Query('orderId') orderId: number) {
+    await this.service.deleteByOrderId(Number(orderId));
   }
 }
