@@ -1,13 +1,13 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 
 export class BaseResponse {
-  @ApiResponseProperty({ type: String })
+  @ApiResponseProperty({ type: Number })
   id: number;
 
-  @ApiResponseProperty({ type: String })
+  @ApiResponseProperty({ type: Date })
   created_at: Date;
 
-  @ApiResponseProperty({ type: String })
+  @ApiResponseProperty({ type: Date })
   updated_at: Date;
 }
 
