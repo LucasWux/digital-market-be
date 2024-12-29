@@ -43,4 +43,12 @@ export class UserService {
   async getAll() {
     return await this.repo.find();
   }
+
+  async deleteByUserId(userId: number) {
+    await this.repo.delete(userId);
+  }
+
+  async deleteAll() {
+    await this.repo.clear();
+  }
 }
