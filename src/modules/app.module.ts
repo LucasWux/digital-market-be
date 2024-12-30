@@ -18,6 +18,7 @@ import { ChatModule } from './chat/chat.module';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { OrderModule } from './order/order.module';
 import { RatingModule } from './rating/rating.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { RatingModule } from './rating/rating.module';
     }),
     FileUploadModule,
     HealthCheckModule,
+    SocketModule,
     AuthModule,
     UserModule,
     ProductModule,

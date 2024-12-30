@@ -7,6 +7,7 @@ import { CreateChatDto } from './dto/create-chat.dto';
 import { User } from '../user/entities/user.entity';
 import { UserResponseDto } from '../user/dto/response-user.dto';
 import { getTimeNowBySeconds } from 'src/utils/timeHelpers';
+import { SocketService } from '../socket/socket.service';
 
 @Injectable()
 export class ChatService {
@@ -15,14 +16,17 @@ export class ChatService {
     private readonly repo: Repository<Chat>,
     @InjectRepository(User)
     private readonly userRepo: Repository<User>,
+    private readonly socketService: SocketService,
   ) {}
 
   async create(senderId: number, createChatDto: CreateChatDto) {
-    return await this.repo.save({
+    const chat = await this.repo.save({
       senderId,
       ...createChatDto,
       createTime: getTimeNowBySeconds(),
     });
+    this.socketService.emitChatToRoom(chat);
+    return chat;
   }
 
   async getChatBox(ownerId: number, queryChatDto: QueryChatDto) {

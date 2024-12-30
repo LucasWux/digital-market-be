@@ -13,3 +13,7 @@ export function getRandomNumbersCustom(x: number, n: number): number[] {
 
   return numbers.slice(0, x);
 }
+
+export const getRoom = (id1: number, id2: number) => {
+  return id1 > id2 ? `${id2}:${id1}` : `${id1}:${id2}`;
+};
