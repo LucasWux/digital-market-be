@@ -1,8 +1,11 @@
 import { ApiResponseProperty } from '@nestjs/swagger';
 import { OrderStatus } from '../entities/order.entity';
-import { BasePaginationResponse } from 'src/utils/base/base-response';
+import {
+  BasePaginationResponse,
+  BaseResponse,
+} from 'src/utils/base/base-response';
 
-export class OrderResponse {
+export class OrderResponse extends BaseResponse {
   @ApiResponseProperty({ enum: OrderStatus })
   status: OrderStatus;
 
